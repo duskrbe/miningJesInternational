@@ -261,7 +261,7 @@ class MiningData:
 
         # menghilankan kolom
         df_association_unique = df_association_unique.drop(
-            columns=["antecedent support", "consequent support", "support"]
+            columns=["antecedent support", "consequent support", "support", "lift"]
         )
 
         # Mengembalikan nilai daftar dari string (opsional, tergantung pada kebutuhan)
@@ -275,7 +275,7 @@ class MiningData:
 
         # mengurutkan
         df_association_unique = df_association_unique.sort_values(
-            by=["confidence"], ascending=False
+            by=["confidence", "lift"], ascending=False
         )
 
         # Mereset index dan mengatur index mulai dari 1
