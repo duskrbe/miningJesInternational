@@ -30,7 +30,7 @@ class UserInterface:
             if "upload_transaksi" in session_state:
                 if not md.getUploadTransaksi().empty:
                     session_state.selected_page = "Proses Aturan Asosiasi"
-                    st.experimental_rerun()
+                    st.rerun()
                 else:
                     st.error(
                         "Belum ada file transaksi yang diunggah. Silahkan upload terlebih dahulu!"
@@ -59,14 +59,14 @@ class UserInterface:
                 type="primary",
             ):
                 session_state.selected_page = "Hasil Rekomendasi"
-                st.experimental_rerun()
+                st.rerun()
         else:
             st.error(
                 "Belum ada file transaksi yang diunggah. Silahkan upload terlebih dahulu!"
             )
             if st.button("Upload File", type="primary", use_container_width=True):
                 session_state.selected_page = "Upload File Transaksi"
-                st.experimental_rerun()
+                st.rerun()
 
     # Halaman hasil rekomendasi
     def halamanHasilRekomendasi():
@@ -155,7 +155,7 @@ class UserInterface:
             )
             if st.button("Upload File", type="primary", use_container_width=True):
                 session_state.selected_page = "Upload File Transaksi"
-                st.experimental_rerun()
+                st.rerun()
 
 
 # Main function to run the app
