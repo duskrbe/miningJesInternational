@@ -2,4 +2,4 @@ streamlit
 pandas
 mlxtend
 streamlit_option_menu
-openpyxl
+xlsxwriter
