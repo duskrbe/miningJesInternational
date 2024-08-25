@@ -52,6 +52,8 @@ class MiningData:
             st.success("Berhasil mengupload file transaksi")
             if st.button("Ganti data file transaksi"):
                 MiningData.setUploadTransaksi(None, None)
+                session_state.df_association_unique = pd.DataFrame()
+                session_state.cek_proses_asosiasi = False
                 st.rerun()
 
     def validasiUploadTransaksi(file):
