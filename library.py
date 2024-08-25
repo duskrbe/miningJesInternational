@@ -275,7 +275,7 @@ class MiningData:
 
         # mengurutkan
         df_association_unique = df_association_unique.sort_values(
-            by=["confidence", "lift"], ascending=False
+            by=["confidence"], ascending=False
         )
 
         # Mereset index dan mengatur index mulai dari 1
