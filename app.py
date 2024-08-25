@@ -8,7 +8,6 @@ st.set_page_config(
     page_icon=":building_construction:",
 )
 
-
 class UserInterface:
     # Halaman upload transaksi
     def halamanUploadTransaksi():
@@ -18,7 +17,10 @@ class UserInterface:
             "Sistem data mining untuk penempatan tata letak produk di CV. Jes International berdasarkan pola barang yang dipesan customer"
         )
         st.divider()
-
+        if "df_association_unique" not in session_state:
+            session_state.df_association_unique = pd.DataFrame()
+        if "cek_proses_asosiasi" not in session_state:
+            session_state.cek_proses_asosiasi = False
         upload = md.uploadTransaksi()
         md.validasiUploadTransaksi(upload)
 
@@ -28,7 +30,7 @@ class UserInterface:
             if "upload_transaksi" in session_state:
                 if not md.getUploadTransaksi().empty:
                     session_state.selected_page = "Proses Aturan Asosiasi"
-                    st.rerun()
+                    st.experimental_rerun()
                 else:
                     st.error(
                         "Belum ada file transaksi yang diunggah. Silahkan upload terlebih dahulu!"
@@ -41,6 +43,7 @@ class UserInterface:
         if not md.getUploadTransaksi().empty:
             if "proses_aturan_asosiasi" not in session_state:
                 session_state.proses_aturan_asosiasi = False
+            session_state.cek_proses_asosiasi = True
             transaksi = md.getUploadTransaksi()
             pilihAtribut = md.pilihAtribut(transaksi)
             cleaningData = md.cleaningData(pilihAtribut)
@@ -56,14 +59,14 @@ class UserInterface:
                 type="primary",
             ):
                 session_state.selected_page = "Hasil Rekomendasi"
-                st.rerun()
+                st.experimental_rerun()
         else:
             st.error(
                 "Belum ada file transaksi yang diunggah. Silahkan upload terlebih dahulu!"
             )
             if st.button("Upload File", type="primary", use_container_width=True):
                 session_state.selected_page = "Upload File Transaksi"
-                st.rerun()
+                st.experimental_rerun()
 
     # Halaman hasil rekomendasi
     def halamanHasilRekomendasi():
@@ -72,10 +75,13 @@ class UserInterface:
         session_state.proses_aturan_asosiasi = True
         if md.periksaUploadTransaksi():
             df_association_unique = session_state.df_association_unique
-            if df_association_unique.empty:
-                st.error(
-                    "Tidak ada rekomendasi karena tidak terdapat rule yang dihasilkan"
-                )
+            if (
+                df_association_unique.empty
+                and session_state.cek_proses_asosiasi == False
+            ):
+                st.error("Proses mining belum dilakukan")
+            elif df_association_unique.empty:
+                st.error("Tidak ada hasil rekomendasi")
             else:
                 # membuat dataframe rekomendasi
                 nama_barang = []
@@ -132,7 +138,7 @@ class UserInterface:
                     unsafe_allow_html=True,
                 )
                 st.markdown(
-                    "<p>Hasil rekomendasi ini adalah representasi pengetahuan yang dapat digunakan sebagai referensi bagi petugas CV. Jes International untuk penempatan barang yang dapat diletakkan berdekatan atau bersamaan sesuai pola pesanan customer. </p>",
+                    "<p>Hasil rekomendasi ini adalah representasi pengetahuan yang dapat digunakan sebagai referensi bagi petugas CV. Jes International untuk membantu dalam penempatan barang yang dapat diletakkan berdekatan atau bersamaan sesuai pola pesanan customer. </p>",
                     unsafe_allow_html=True,
                 )
                 st.write(
@@ -149,7 +155,7 @@ class UserInterface:
             )
             if st.button("Upload File", type="primary", use_container_width=True):
                 session_state.selected_page = "Upload File Transaksi"
-                st.rerun()
+                st.experimental_rerun()
 
 
 # Main function to run the app
