@@ -52,7 +52,7 @@ class MiningData:
             st.success("Berhasil mengupload file transaksi")
             if st.button("Ganti data file transaksi"):
                 MiningData.setUploadTransaksi(None, None)
-                st.experimental_rerun()
+                st.rerun()
 
     def validasiUploadTransaksi(file):
         if file:
@@ -66,7 +66,7 @@ class MiningData:
             ]
             if len(missing_columns) == 0:
                 MiningData.setUploadTransaksi(file, dataframe_transaction)
-                st.experimental_rerun()
+                st.rerun()
             else:
                 st.error("Pastikan file transaksi sesuai dengan format")
 
