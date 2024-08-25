@@ -69,8 +69,9 @@ class UserInterface:
     def halamanHasilRekomendasi():
         st.markdown("<h1>Halaman Hasil Rekomendasi</h1>", unsafe_allow_html=True)
         st.divider()
-        session_state.proses_aturan_asosiasi = True
+        
         if md.periksaUploadTransaksi():
+            session_state.proses_aturan_asosiasi = True
             df_association_unique = session_state.df_association_unique
             if df_association_unique.empty:
                 st.error(
