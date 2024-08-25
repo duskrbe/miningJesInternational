@@ -133,7 +133,7 @@ class MiningData:
         return min_support
 
     def rules(transformData, min_support):
-        min_confidence = 0.70
+        min_confidence = 0.7
         if "rules" not in session_state:
             session_state.rules = None
 
@@ -261,7 +261,7 @@ class MiningData:
 
         # menghilankan kolom
         df_association_unique = df_association_unique.drop(
-            columns=["antecedent support", "consequent support", "support", "lift"]
+            columns=["antecedent support", "consequent support", "support"]
         )
 
         # Mengembalikan nilai daftar dari string (opsional, tergantung pada kebutuhan)
@@ -275,7 +275,7 @@ class MiningData:
 
         # mengurutkan
         df_association_unique = df_association_unique.sort_values(
-            by=["confidence"], ascending=False
+            by=["confidence", "lift"], ascending=False
         )
 
         # Mereset index dan mengatur index mulai dari 1
