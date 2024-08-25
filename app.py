@@ -71,8 +71,6 @@ class UserInterface:
         st.divider()
         session_state.proses_aturan_asosiasi = True
         if md.periksaUploadTransaksi():
-            if 'df_association_unique' not in session_state:
-                session_state.df_association_unique = pd.DataFrame()  
             df_association_unique = session_state.df_association_unique
             if df_association_unique.empty:
                 st.error(
