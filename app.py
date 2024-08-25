@@ -132,7 +132,7 @@ class UserInterface:
                     unsafe_allow_html=True,
                 )
                 st.markdown(
-                    "<p>Hasil rekomendasi ini adalah representasi pengetahuan yang dapat digunakan sebagai referensi bagi petugas CV. Jes International untuk membantu dalam penempatan barang yang dapat diletakkan berdekatan atau bersamaan sesuai pola pesanan customer. </p>",
+                    "<p>Hasil rekomendasi ini adalah representasi pengetahuan yang dapat digunakan sebagai referensi bagi petugas CV. Jes International untuk penempatan barang yang dapat diletakkan berdekatan atau bersamaan sesuai pola pesanan customer. </p>",
                     unsafe_allow_html=True,
                 )
                 st.write(
