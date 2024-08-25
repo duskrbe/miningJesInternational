@@ -81,7 +81,7 @@ class UserInterface:
             ):
                 st.error("Proses mining belum dilakukan")
             elif df_association_unique.empty:
-                st.error("Tidak ada hasil rekomendasi")
+                st.error("Tidak ada rekomendasi karena tidak terdapat rule yang dihasilkan")
             else:
                 # membuat dataframe rekomendasi
                 nama_barang = []
