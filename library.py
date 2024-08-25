@@ -452,6 +452,7 @@ class MiningData:
                 "consequent support",
                 "support",
                 "confidence",
+                "lift"
             ]
         ]
         st.dataframe(rules, use_container_width=True)
