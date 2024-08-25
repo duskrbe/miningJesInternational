@@ -70,14 +70,12 @@ class MiningData:
             else:
                 st.error("Pastikan file transaksi sesuai dengan format")
 
-    @st.cache_data
     def pilihAtribut(transaksi):
         # Ambil atribut tertentu
         pilihAtribut = transaksi.copy()
         pilihAtribut = pilihAtribut[["NO INVOICE", "KODE"]]
         return pilihAtribut
 
-    @st.cache_data
     def cleaningData(pilihAtribut):
         cleaningData = pilihAtribut[["NO INVOICE", "KODE"]].copy()
         # Menghapus baris yang memiliki nilai kosong di kolom 'KODE'
@@ -301,7 +299,6 @@ class MiningData:
 
         return rules, frequent_itemsets
 
-    @st.cache_data
     def tampilProsesAturanAsosiasi():
 
         # tab1, tab2, tab3, tab4 = st.tabs(
