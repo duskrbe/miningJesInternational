@@ -3,3 +3,4 @@ pandas
 mlxtend
 streamlit_option_menu
 xlsxwriter
+openpyxl
